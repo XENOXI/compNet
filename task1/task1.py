@@ -29,9 +29,10 @@ def read_block(block):
     return [name,date,teacher,form_of_attestation,mark]
 
 
+
 def login_form(browser:webdriver,login_file):
-    login = login_file.readline()
-    password = login_file.readline()
+    login = login_file.readline().replace('\n','')
+    password = login_file.readline().replace('\n','')
 
     browser.find_element(By.ID,'username').send_keys(login)
     browser.find_element(By.ID,'password').send_keys(password)
