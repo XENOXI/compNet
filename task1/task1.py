@@ -46,7 +46,7 @@ def init_browser():
     browser.get('https://cab.nsu.ru/user/sign-in/auth?authclient=nsu')
     return browser
 
-
+# Функйия для создания таблицы
 def create_table(browser:webdriver,selected_semester:list):
     tables = []
     for i in selected_semester:
@@ -57,8 +57,9 @@ def create_table(browser:webdriver,selected_semester:list):
             continue
         atab[0].click()
 
-        semesterTable = pd.DataFrame([read_block(block) for block in browser.find_elements(By.CLASS_NAME,'item-grade')]).dropna(axis=0)
-        tables.append(semesterTable)
+        # получает датафрейм по блокам на странице
+        semester_table = pd.DataFrame([read_block(block) for block in browser.find_elements(By.CLASS_NAME,'item-grade')]).dropna(axis=0)
+        tables.append(semester_table)
 
     table= pd.concat(tables)
 
@@ -71,12 +72,8 @@ def create_table(browser:webdriver,selected_semester:list):
 
 
 browser = init_browser()
-
-login_form(browser,login_file)
-
-browser.find_element(By.XPATH,"//a[contains(.,'Зачётная книжка')]").click()
-
-table = create_table(browser,selected_semester)
-
+login_form(browser, login_file)
+browser.find_element(By.XPATH, "//a[contains(.,'Зачётная книжка')]").click()
+table = create_table(browser, selected_semester)
 table.to_csv(csv_file)
 
