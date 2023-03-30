@@ -1,0 +1,62 @@
+html{
+    box-sizing: border-box;
+    height: 100%;
+}
+body{
+    align-items: center;
+    background: linear-gradient(320deg,#863ac5,#64c9b4);
+    text-align: center;
+    display: flex;
+    height: inherit;
+    justify-content: center;
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(36, 36, 36);
+}
+table{
+    align-items: center;
+    backdrop-filter: blur(5.5px);
+    --webkit-backdrop-filter: blur(5.5px);
+    background: rgba(255, 255, 255, 0.75);
+    border: 10px solid rgba(255, 255, 255, 0.01 );
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(35, 35, 35, 0.1 );    
+    backdrop-filter: blur(4px);
+    --webkit-backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.3);
+    width: 500px;
+}
+
+td{
+    padding: 5px;
+}
+
+input{
+    align-items: center;
+    backdrop-filter: blur(5.5px);
+    --webkit-backdrop-filter: blur(5.5px);
+    background: rgba(255, 255, 255, 1);
+    border: 6px solid rgba(255, 255, 255, 0.01 );
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(35, 35, 35, 0.1 );    
+    backdrop-filter: blur(4px);
+    --webkit-backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.8);
+    width: 300px;
+}
+
+input[type=submit]{
+    margin-top: 10px;
+    font-size: large;
+    font-weight: bolder;
+    backdrop-filter: blur(5.5px);
+    --webkit-backdrop-filter: blur(5.5px);
+    background-color: #01d464;
+    border: 10px solid rgba(255, 255, 255, 0.01 );
+    border-radius: 10px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);    
+    backdrop-filter: blur(4px);
+    --webkit-backdrop-filter: blur(4px);
+    color: rgb(43, 43, 43);
+    width: 100px;
+}
