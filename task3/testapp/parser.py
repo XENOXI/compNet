@@ -2,12 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
 
-
-csv_file = open('eggs.csv', 'w', newline='') 
-selected_semester=range(1,7)
-login_file = open('login.txt','r')
-
-def read_block(block):
+def read_block(block)->list:
     name = block.find_element(By.CLASS_NAME,'name').text 
     mark = block.find_element(By.CLASS_NAME,'icons').text
 
@@ -30,24 +25,22 @@ def read_block(block):
 
 
 
-def login_form(browser:webdriver,login_file):
-    login = login_file.readline().replace('\n','')
-    password = login_file.readline().replace('\n','')
-
+def login_form(browser:webdriver,login,password):
     browser.find_element(By.ID,'username').send_keys(login)
     browser.find_element(By.ID,'password').send_keys(password)
     browser.find_element(By.ID,'submitBtn').click()
 
 
-def init_browser():
+def init_browser(link)->webdriver:
     options = webdriver.ChromeOptions()
     options.add_experimental_option('excludeSwitches', ['enable-logging'])
     browser = webdriver.Chrome(options=options)
-    browser.get('https://cab.nsu.ru/user/sign-in/auth?authclient=nsu')
+    browser.get(link)
+    #browser.get('https://cab.nsu.ru/user/sign-in/auth?authclient=nsu')
     return browser
 
 # Функйия для создания таблицы
-def create_table(browser:webdriver,selected_semester:list):
+def create_table(browser:webdriver,selected_semester:list)->pd.DataFrame:
     tables = []
     for i in selected_semester:
 
@@ -71,9 +64,10 @@ def create_table(browser:webdriver,selected_semester:list):
     return table
 
 
-browser = init_browser()
-login_form(browser, login_file)
-browser.find_element(By.XPATH, "//a[contains(.,'Зачётная книжка')]").click()
-table = create_table(browser, selected_semester)
-table.to_csv(csv_file)
+def parse(link,login,password,selected_semester):
+    browser = init_browser(link)
+    login_form(browser, login,password)
+    browser.find_element(By.XPATH, "//a[contains(.,'Зачётная книжка')]").click()
+    table = create_table(browser, selected_semester)
+    return table.to_csv()
 
