@@ -1,6 +1,17 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
+from django import forms
+
+class UserForm(forms.Form):
+    link = forms.CharField()
+    login = forms.CharField()
+    password = forms.CharField()
+    first_semester = forms.IntegerField()
+    last_semester = forms.IntegerField()
+
+class SendForm(forms.Form):
+    file = forms.FileField()
 
 def read_block(block)->list:
     name = block.find_element(By.CLASS_NAME,'name').text 
